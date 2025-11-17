@@ -1,0 +1,22 @@
+services:
+  wazuh-log-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wazuh-log-backend
+    environment:
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
